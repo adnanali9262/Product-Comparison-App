@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -40,15 +40,24 @@ button {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 button:hover {
   background: #16a34a;
 }
 
+.install {
+  background: #3b82f6;
+}
+
+.hidden {
+  display: none;
+}
+
 #result {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   white-space: pre-line;
 }
