@@ -1,32 +1,52 @@
-function compare() {
-  const w1 = parseFloat(document.getElementById('w1').value);
-  const p1 = parseFloat(document.getElementById('p1').value);
-  const w2 = parseFloat(document.getElementById('w2').value);
-  const p2 = parseFloat(document.getElementById('p2').value);
+let deferredPrompt;
 
-  if (!w1 || !p1 || !w2 || !p2) {
-    document.getElementById('result').innerText = "Please enter all values.";
+function togglePack3() {
+  document.getElementById("pack3").classList.toggle("hidden");
+}
+
+function compare() {
+  const packs = [];
+
+  for (let i = 1; i <= 3; i++) {
+    const w = parseFloat(document.getElementById("w" + i)?.value);
+    const p = parseFloat(document.getElementById("p" + i)?.value);
+
+    if (w && p) {
+      packs.push({
+        name: "Pack " + i,
+        unitPrice: p / w
+      });
+    }
+  }
+
+  if (packs.length < 2) {
+    document.getElementById("result").innerText =
+      "Enter at least two valid packs.";
     return;
   }
 
-  const unit1 = p1 / w1;
-  const unit2 = p2 / w2;
+  packs.sort((a, b) => a.unitPrice - b.unitPrice);
 
-  let resultText = "";
+  let resultText = "Best value: " + packs[0].name + "\n\n";
 
-  if (unit1 < unit2) {
-    resultText = "Pack 1 gives more product for the price.";
-  } else if (unit2 < unit1) {
-    resultText = "Pack 2 gives more product for the price.";
-  } else {
-    resultText = "Both packs offer equal value.";
-  }
+  packs.forEach(p => {
+    resultText += `${p.name} = ${p.unitPrice.toFixed(4)} per gram\n`;
+  });
 
-  resultText += `
-
-Price per gram:
-Pack 1 = ${unit1.toFixed(4)}
-Pack 2 = ${unit2.toFixed(4)}`;
-
-  document.getElementById('result').innerText = resultText;
+  document.getElementById("result").innerText = resultText;
 }
+
+/* Install Prompt Handling */
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById("installBtn").classList.remove("hidden");
+});
+
+document.getElementById("installBtn").addEventListener("click", async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt = null;
+  }
+});
