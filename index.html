@@ -25,7 +25,17 @@
     <input type="number" id="p2" placeholder="Price">
   </div>
 
+  <button id="addPackBtn" onclick="togglePack3()">+ Add Third Pack</button>
+
+  <div class="card hidden" id="pack3">
+    <h2>Pack 3</h2>
+    <input type="number" id="w3" placeholder="Weight (grams)">
+    <input type="number" id="p3" placeholder="Price">
+  </div>
+
   <button onclick="compare()">Compare</button>
+
+  <button id="installBtn" class="install hidden">Install App</button>
 
   <div id="result"></div>
 </div>
