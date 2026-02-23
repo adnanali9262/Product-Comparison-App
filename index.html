@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Better Packing Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>📦 Better Packing Calculator</h1>
+
+  <div class="card">
+    <h2>Pack 1</h2>
+    <input type="number" id="w1" placeholder="Weight (grams)">
+    <input type="number" id="p1" placeholder="Price">
+  </div>
+
+  <div class="card">
+    <h2>Pack 2</h2>
+    <input type="number" id="w2" placeholder="Weight (grams)">
+    <input type="number" id="p2" placeholder="Price">
+  </div>
+
+  <button onclick="compare()">Compare</button>
+
+  <div id="result"></div>
+</div>
+
+<script src="app.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+</body>
+</html>
